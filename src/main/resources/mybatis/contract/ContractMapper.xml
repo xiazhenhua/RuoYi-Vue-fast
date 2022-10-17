@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.contract.mapper.ContractMapper">
+
+    <resultMap type="com.ruoyi.project.contract.domain.Contract" id="ContractResult">
+        <result property="id"    column="id"    />
+        <result property="pid"    column="pid"    />
+        <result property="ancestors"    column="ancestors"    />
+        <result property="contractType"    column="contract_type"    />
+        <result property="businessType"    column="business _type"    />
+        <result property="payType"    column="pay_type"    />
+        <result property="number"    column="number"    />
+        <result property="productNo"    column="product_no"    />
+        <result property="target"    column="target"    />
+        <result property="priceMethod"    column="price_method"    />
+        <result property="source"    column="source"    />
+        <result property="price"    column="price"    />
+        <result property="quantity"    column="quantity"    />
+        <result property="additionalCharges"    column="additional_charges"    />
+        <result property="additionalSource"    column="additional_source"    />
+        <result property="totalAmountExcludeTax"    column="total_amount_exclude_tax"    />
+        <result property="tax"    column="tax"    />
+        <result property="totalAmountIncludeTax"    column="total_amount_include_tax"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="supplierId"    column="supplier_id"    />
+        <result property="demandId"    column="demand_id"    />
+        <result property="signingDate"    column="signing_date"    />
+        <result property="validateDateBegin"    column="validate_date_begin"    />
+        <result property="validateDateEnd"    column="validate_date_end"    />
+        <result property="penalizeStandard"    column="penalize_standard"    />
+        <result property="place"    column="place"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="status"    column="status"    />
+        <result property="createPerson"    column="create_person"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updatePerson"    column="update_person"    />
+        <result property="updateDate"    column="update_date"    />
+    </resultMap>
+
+    <sql id="selectContractVo">
+        select id, pid, ancestors, contract_type, business_type, pay_type, number, product_no, target, price_method, source, price, quantity, additional_charges, additional_source, total_amount_exclude_tax, tax, total_amount_include_tax, dept_id, supplier_id, demand_id, signing_date, validate_date_begin, validate_date_end, penalize_standard, place, remarks, status, create_person, create_date, update_person, update_date from contract
+    </sql>
+
+    <select id="selectContractList" parameterType="com.ruoyi.project.contract.domain.Contract" resultMap="ContractResult">
+        <include refid="selectContractVo"/>
+        <where>
+            <if test="pid != null "> and pid = #{pid}</if>
+            <if test="ancestors != null  and ancestors != ''"> and ancestors = #{ancestors}</if>
+            <if test="contractType != null "> and contract_type = #{contractType}</if>
+            <if test="businessType != null "> and business_type = #{businessType}</if>
+            <if test="payType != null "> and pay_type = #{payType}</if>
+            <if test="number != null  and number != ''"> and number = #{number}</if>
+            <if test="productNo != null  and productNo != ''"> and product_no = #{productNo}</if>
+            <if test="target != null  and target != ''"> and target = #{target}</if>
+            <if test="priceMethod != null  and priceMethod != ''"> and price_method = #{priceMethod}</if>
+            <if test="source != null  and source != ''"> and source = #{source}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="quantity != null "> and quantity = #{quantity}</if>
+            <if test="additionalCharges != null "> and additional_charges = #{additionalCharges}</if>
+            <if test="additionalSource != null  and additionalSource != ''"> and additional_source = #{additionalSource}</if>
+            <if test="totalAmountExcludeTax != null "> and total_amount_exclude_tax = #{totalAmountExcludeTax}</if>
+            <if test="tax != null "> and tax = #{tax}</if>
+            <if test="totalAmountIncludeTax != null "> and total_amount_include_tax = #{totalAmountIncludeTax}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="supplierId != null "> and supplier_id = #{supplierId}</if>
+            <if test="demandId != null "> and demand_id = #{demandId}</if>
+            <if test="signingDate != null "> and signing_date = #{signingDate}</if>
+            <if test="validateDateBegin != null "> and validate_date_begin = #{validateDateBegin}</if>
+            <if test="validateDateEnd != null "> and validate_date_end = #{validateDateEnd}</if>
+            <if test="penalizeStandard != null  and penalizeStandard != ''"> and penalize_standard = #{penalizeStandard}</if>
+            <if test="place != null  and place != ''"> and place = #{place}</if>
+            <if test="remarks != null  and remarks != ''"> and remarks = #{remarks}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="createPerson != null  and createPerson != ''"> and create_person = #{createPerson}</if>
+            <if test="createDate != null "> and create_date = #{createDate}</if>
+            <if test="updatePerson != null  and updatePerson != ''"> and update_person = #{updatePerson}</if>
+            <if test="updateDate != null "> and update_date = #{updateDate}</if>
+        </where>
+    </select>
+
+    <select id="selectContractById" parameterType="Long" resultMap="ContractResult">
+        <include refid="selectContractVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertContract" parameterType="com.ruoyi.project.contract.domain.Contract" useGeneratedKeys="true" keyProperty="id">
+        insert into contract
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pid != null">pid,</if>
+            <if test="ancestors != null and ancestors != ''">ancestors,</if>
+            <if test="contractType != null">contract_type,</if>
+            <if test="businessType != null">business_type,</if>
+            <if test="payType != null">pay_type,</if>
+            <if test="number != null and number != ''">number,</if>
+            <if test="productNo != null and productNo != ''">product_no,</if>
+            <if test="target != null and target != ''">target,</if>
+            <if test="priceMethod != null and priceMethod != ''">price_method,</if>
+            <if test="source != null and source != ''">source,</if>
+            <if test="price != null">price,</if>
+            <if test="quantity != null">quantity,</if>
+            <if test="additionalCharges != null">additional_charges,</if>
+            <if test="additionalSource != null and additionalSource != ''">additional_source,</if>
+            <if test="totalAmountExcludeTax != null">total_amount_exclude_tax,</if>
+            <if test="tax != null">tax,</if>
+            <if test="totalAmountIncludeTax != null">total_amount_include_tax,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="supplierId != null">supplier_id,</if>
+            <if test="demandId != null">demand_id,</if>
+            <if test="signingDate != null">signing_date,</if>
+            <if test="validateDateBegin != null">validate_date_begin,</if>
+            <if test="validateDateEnd != null">validate_date_end,</if>
+            <if test="penalizeStandard != null and penalizeStandard != ''">penalize_standard,</if>
+            <if test="place != null and place != ''">place,</if>
+            <if test="remarks != null and remarks != ''">remarks,</if>
+            <if test="status != null">status,</if>
+            <if test="createPerson != null and createPerson != ''">create_person,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="updatePerson != null and updatePerson != ''">update_person,</if>
+            <if test="updateDate != null">update_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pid != null">#{pid},</if>
+            <if test="ancestors != null and ancestors != ''">#{ancestors},</if>
+            <if test="contractType != null">#{contractType},</if>
+            <if test="businessType != null">#{businessType},</if>
+            <if test="payType != null">#{payType},</if>
+            <if test="number != null and number != ''">#{number},</if>
+            <if test="productNo != null and productNo != ''">#{productNo},</if>
+            <if test="target != null and target != ''">#{target},</if>
+            <if test="priceMethod != null and priceMethod != ''">#{priceMethod},</if>
+            <if test="source != null and source != ''">#{source},</if>
+            <if test="price != null">#{price},</if>
+            <if test="quantity != null">#{quantity},</if>
+            <if test="additionalCharges != null">#{additionalCharges},</if>
+            <if test="additionalSource != null and additionalSource != ''">#{additionalSource},</if>
+            <if test="totalAmountExcludeTax != null">#{totalAmountExcludeTax},</if>
+            <if test="tax != null">#{tax},</if>
+            <if test="totalAmountIncludeTax != null">#{totalAmountIncludeTax},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="supplierId != null">#{supplierId},</if>
+            <if test="demandId != null">#{demandId},</if>
+            <if test="signingDate != null">#{signingDate},</if>
+            <if test="validateDateBegin != null">#{validateDateBegin},</if>
+            <if test="validateDateEnd != null">#{validateDateEnd},</if>
+            <if test="penalizeStandard != null and penalizeStandard != ''">#{penalizeStandard},</if>
+            <if test="place != null and place != ''">#{place},</if>
+            <if test="remarks != null and remarks != ''">#{remarks},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createPerson != null and createPerson != ''">#{createPerson},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="updatePerson != null and updatePerson != ''">#{updatePerson},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateContract" parameterType="com.ruoyi.project.contract.domain.Contract">
+        update contract
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="ancestors != null and ancestors != ''">ancestors = #{ancestors},</if>
+            <if test="contractType != null">contract_type = #{contractType},</if>
+            <if test="businessType != null">business _type = #{businessType},</if>
+            <if test="payType != null">pay_type = #{payType},</if>
+            <if test="number != null and number != ''">number = #{number},</if>
+            <if test="productNo != null and productNo != ''">product_no = #{productNo},</if>
+            <if test="target != null and target != ''">target = #{target},</if>
+            <if test="priceMethod != null and priceMethod != ''">price_method = #{priceMethod},</if>
+            <if test="source != null and source != ''">source = #{source},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="quantity != null">quantity = #{quantity},</if>
+            <if test="additionalCharges != null">additional_charges = #{additionalCharges},</if>
+            <if test="additionalSource != null and additionalSource != ''">additional_source = #{additionalSource},</if>
+            <if test="totalAmountExcludeTax != null">total_amount_exclude_tax = #{totalAmountExcludeTax},</if>
+            <if test="tax != null">tax = #{tax},</if>
+            <if test="totalAmountIncludeTax != null">total_amount_include_tax = #{totalAmountIncludeTax},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="supplierId != null">supplier_id = #{supplierId},</if>
+            <if test="demandId != null">demand_id = #{demandId},</if>
+            <if test="signingDate != null">signing_date = #{signingDate},</if>
+            <if test="validateDateBegin != null">validate_date_begin = #{validateDateBegin},</if>
+            <if test="validateDateEnd != null">validate_date_end = #{validateDateEnd},</if>
+            <if test="penalizeStandard != null and penalizeStandard != ''">penalize_standard = #{penalizeStandard},</if>
+            <if test="place != null and place != ''">place = #{place},</if>
+            <if test="remarks != null and remarks != ''">remarks = #{remarks},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createPerson != null and createPerson != ''">create_person = #{createPerson},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="updatePerson != null and updatePerson != ''">update_person = #{updatePerson},</if>
+            <if test="updateDate != null">update_date = #{updateDate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteContractById" parameterType="Long">
+        delete from contract where id = #{id}
+    </delete>
+
+    <delete id="deleteContractByIds" parameterType="String">
+        delete from contract where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
