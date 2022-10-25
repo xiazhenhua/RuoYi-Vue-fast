@@ -162,9 +162,9 @@ public class MasterController {
     })
     @PreAuthorize("@ss.hasPermi('contract:manage:list')")
     @GetMapping("/goods/list")
-    public AjaxResult goodslist()
+    public AjaxResult goodslist(String masterdataid)
     {
-        List<MasterGoodsModel> list = masterService.getMasterGoodsList();
+        List<MasterGoodsModel> list = masterService.getMasterGoodsList(masterdataid);
         return AjaxResult.success(list);
     }
 
@@ -180,9 +180,9 @@ public class MasterController {
     })
     @PreAuthorize("@ss.hasPermi('contract:manage:list')")
     @GetMapping("/customer/list")
-    public AjaxResult list()
+    public AjaxResult list(String masterdataid)
     {
-        List<MasterCustomerModel> list = masterService.getMasterCustomerList();
+        List<MasterCustomerModel> list = masterService.getMasterCustomerList(masterdataid);
         return AjaxResult.success(list);
     }
 }

@@ -9,6 +9,7 @@ import com.ruoyi.project.contract.domain.Contract;
 import com.ruoyi.project.contract.mapper.ContractMapper;
 import com.ruoyi.project.contract.service.IContractService;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -142,7 +143,21 @@ public class ContractServiceImpl implements IContractService
     @DataScope(deptAlias = "d")
     public List<Contract> selectContractList(boolean flag ,Contract contract)
     {
-        return contractMapper.selectContractList(flag,contract);
+        if (flag){
+//            如果是采购合同 查询ContractType = 1
+            contract.setContractType(1);
+        }else{
+            contract.setContractType(0);
+        }
+        if (contract.getDates() != null){
+            Date startDate = contract.getDates()[0];
+            if (contract.getDates().length > 1){
+                Date endDate = contract.getDates()[1];
+                contract.setEndDate(endDate);
+            }
+            contract.setStartDate(startDate);
+        }
+        return contractMapper.selectContractList(contract);
     }
 
     /**

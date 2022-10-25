@@ -46,13 +46,26 @@
     <select id="getMasterGoodsList" resultType="com.ruoyi.project.client.bean.MasterGoodsModel">
 
         select * from master_goods
+        <if test="masterdataIds != null">
+            where mdm_code in
+            <foreach collection="masterdataIds" item="item" index="index"
+                     separator="," open="(" close=")">
+                #{item}
+            </foreach>
+        </if>
 
     </select>
     <!--  客商信息主数据列表 -->
     <select id="getMasterCustomerList" resultType="com.ruoyi.project.client.bean.MasterCustomerModel">
 
          select * from master_customer
-
+        <if test="masterdataIds != null">
+            where mdm_code in
+            <foreach collection="masterdataIds" item="item" index="index"
+                     separator="," open="(" close=")">
+                #{item}
+            </foreach>
+        </if>
     </select>
 
 

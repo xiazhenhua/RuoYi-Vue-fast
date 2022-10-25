@@ -2,8 +2,8 @@ package com.ruoyi.project.contract.mapper;
 
 import com.ruoyi.project.client.bean.MasterCustomerModel;
 import com.ruoyi.project.client.bean.MasterGoodsModel;
-import com.ruoyi.project.contract.domain.Contract;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 功能描述
@@ -37,13 +37,13 @@ public interface MasterDataMapper {
      *
      * @return 结果
      */
-    public List<MasterGoodsModel> getMasterGoodsList();
+    public List<MasterGoodsModel> getMasterGoodsList(@Param("masterdataIds") List<String> masterdataIds);
 
     /**
      * 查询客商信息主数据列表
      *
      * @return 结果
      */
-    public List<MasterCustomerModel> getMasterCustomerList();
+    public List<MasterCustomerModel> getMasterCustomerList(@Param("masterdataIds") List<String> masterdataIds);
 
 }

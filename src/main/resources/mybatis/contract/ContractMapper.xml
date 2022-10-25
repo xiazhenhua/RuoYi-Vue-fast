@@ -46,44 +46,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select id, parentId,del_flag, ancestors,photo_url, contract_type, business_type, pay_type, number, product_no, target, price_method, source, price, quantity, additional_charges, additional_source, total_amount_exclude_tax, tax, total_amount_include_tax, dept_id, supplier_id, demand_id, signing_date, validate_date_begin, validate_date_end, penalize_standard, place, remarks, status, create_person, create_date, update_person, update_date from contract
     </sql>
 
-    <select id="selectContractList" parameterType="com.ruoyi.project.contract.domain.Contract" resultMap="ContractResult">
+    <select id="selectContractList" parameterType="Contract" resultMap="ContractResult">
         <include refid="selectContractVo"/>
         <where>
             del_flag = 0
-            <if test="contract.parentId != null "> and parentId = #{parentId}</if>
-            <if test="contract.ancestors != null  and ancestors != ''"> and ancestors = #{ancestors}</if>
+            <if test="parentId != null "> and parentId = #{parentId}</if>
+            <if test="ancestors != null  and ancestors != ''"> and ancestors = #{ancestors}</if>
 
-            <if test="contract.contractType == true "> and contract_type = 1</if>
-            <if test="contract.contractType == false "> and contract_type = 0</if>
+            <if test="contractType == true "> and contract_type = 1</if>
+            <if test="contractType == false "> and contract_type = 0</if>
 
-            <if test="contract.businessType != null "> and business_type = #{businessType}</if>
-            <if test="contract.payType != null "> and pay_type = #{payType}</if>
-            <if test="contract.number != null  and number != ''"> and number = #{number}</if>
-            <if test="contract.productNo != null  and productNo != ''"> and product_no = #{productNo}</if>
-            <if test="contract.target != null  and target != ''"> and target = #{target}</if>
-            <if test="contract.priceMethod != null "> and price_method = #{priceMethod}</if>
-            <if test="contract.source != null  and source != ''"> and source = #{source}</if>
-            <if test="contract.price != null "> and price = #{price}</if>
-            <if test="contract.quantity != null "> and quantity = #{quantity}</if>
-            <if test="contract.additionalCharges != null "> and additional_charges = #{additionalCharges}</if>
-            <if test="contract.additionalSource != null  and additionalSource != ''"> and additional_source = #{additionalSource}</if>
-            <if test="contract.totalAmountExcludeTax != null "> and total_amount_exclude_tax = #{totalAmountExcludeTax}</if>
-            <if test="contract.tax != null "> and tax = #{tax}</if>
-            <if test="contract.totalAmountIncludeTax != null "> and total_amount_include_tax = #{totalAmountIncludeTax}</if>
-            <if test="contract.deptId != null "> and dept_id = #{deptId}</if>
-            <if test="contract.supplierId != null and contract.supplierId != ''"> and supplier_id = #{supplierId}</if>
-            <if test="contract.demandId != null "> and demand_id = #{demandId}</if>
-            <if test="contract.signingDate != null "> and signing_date = #{signingDate}</if>
-            <if test="contract.validateDateBegin != null "> and validate_date_begin = #{validateDateBegin}</if>
-            <if test="contract.validateDateEnd != null "> and validate_date_end = #{validateDateEnd}</if>
-            <if test="contract.penalizeStandard != null  and penalizeStandard != ''"> and penalize_standard = #{penalizeStandard}</if>
-            <if test="contract.place != null  and place != ''"> and place = #{place}</if>
-            <if test="contract.remarks != null  and remarks != ''"> and remarks = #{remarks}</if>
-            <if test="contract.status != null "> and status = #{status}</if>
-            <if test="contract.createPerson != null  and createPerson != ''"> and create_person = #{createPerson}</if>
-            <if test="contract.createDate != null "> and create_date = #{createDate}</if>
-            <if test="contract.updatePerson != null  and updatePerson != ''"> and update_person = #{updatePerson}</if>
-            <if test="contract.updateDate != null "> and update_date = #{updateDate}</if>
+            <if test="businessType != null "> and business_type = #{businessType}</if>
+            <if test="payType != null "> and pay_type = #{payType}</if>
+            <if test="number != null  and number != ''"> AND number like concat('%', #{number}, '%')</if>
+            <if test="productNo != null  and productNo != ''"> and product_no = #{productNo}</if>
+            <if test="target != null  and target != ''"> and target = #{target}</if>
+            <if test="priceMethod != null "> and price_method = #{priceMethod}</if>
+            <if test="source != null  and source != ''"> and source = #{source}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="quantity != null "> and quantity = #{quantity}</if>
+            <if test="additionalCharges != null "> and additional_charges = #{additionalCharges}</if>
+            <if test="additionalSource != null  and additionalSource != ''"> and additional_source = #{additionalSource}</if>
+            <if test="totalAmountExcludeTax != null "> and total_amount_exclude_tax = #{totalAmountExcludeTax}</if>
+            <if test="tax != null "> and tax = #{tax}</if>
+            <if test="totalAmountIncludeTax != null "> and total_amount_include_tax = #{totalAmountIncludeTax}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="supplierId != null and supplierId != ''"> and supplier_id = #{supplierId}</if>
+            <if test="demandId != null "> and demand_id = #{demandId}</if>
+            <if test="signingDate != null "> and signing_date = #{signingDate}</if>
+
+            <if test="startDate != null "> and date_format(signing_date,'%y%m%d') &gt;= date_format(#{startDate, jdbcType=DATE},'%y%m%d')</if>
+            <if test="endDate != null "> and date_format(signing_date,'%y%m%d') &lt;= date_format(#{endDate, jdbcType=DATE},'%y%m%d')</if>
+
+            <if test="validateDateBegin != null "> and validate_date_begin = #{validateDateBegin}</if>
+            <if test="validateDateEnd != null "> and validate_date_end = #{validateDateEnd}</if>
+            <if test="penalizeStandard != null  and penalizeStandard != ''"> and penalize_standard = #{penalizeStandard}</if>
+            <if test="place != null  and place != ''"> and place = #{place}</if>
+            <if test="remarks != null  and remarks != ''"> and remarks = #{remarks}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="createPerson != null  and createPerson != ''"> and create_person = #{createPerson}</if>
+            <if test="createDate != null "> and create_date = #{createDate}</if>
+            <if test="updatePerson != null  and updatePerson != ''"> and update_person = #{updatePerson}</if>
+            <if test="updateDate != null "> and update_date = #{updateDate}</if>
 
         </where>
     </select>

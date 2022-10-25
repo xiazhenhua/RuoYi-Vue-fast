@@ -191,6 +191,14 @@ public class Contract extends TreeEntity
     @ApiModelProperty("更新时间")
     private Date updateDate;
 
+    /**
+     * 条件查询
+     */
+    public Date[] dates;
+
+    public Date startDate;
+    public Date endDate;
+
     /** 子合同 */
     private List<Contract> children = new ArrayList<>();
 
@@ -212,6 +220,7 @@ public class Contract extends TreeEntity
     {
         return id;
     }
+
 
     @Override
     public Long getParentId() {
@@ -503,7 +512,29 @@ public class Contract extends TreeEntity
         this.children = children;
     }
 
+    public Date[] getDates() {
+        return dates;
+    }
 
+    public void setDates(Date[] dates) {
+        this.dates = dates;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 
     @Override
     public String toString() {

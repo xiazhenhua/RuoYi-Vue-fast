@@ -6,13 +6,16 @@ package com.ruoyi.project.contract.service.impl;/**
  */
 
 import com.ruoyi.common.exception.ServiceException;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.project.client.bean.MasterCustomerModel;
 import com.ruoyi.project.client.bean.MasterGoodsModel;
 import com.ruoyi.project.contract.controller.MasterController;
 import com.ruoyi.project.contract.mapper.ContractMapper;
 import com.ruoyi.project.contract.mapper.MasterDataMapper;
 import com.ruoyi.project.contract.service.IMasterService;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,8 +72,12 @@ public class MasterServiceImpl implements IMasterService {
      * @return 结果
      */
     @Override
-    public List<MasterGoodsModel> getMasterGoodsList() {
-        return masterDataMapper.getMasterGoodsList();
+    public List<MasterGoodsModel> getMasterGoodsList(String masterdataId) {
+        List<String> ids = null;
+        if (StringUtils.isNotEmpty(masterdataId)){
+            ids = Arrays.stream(masterdataId.split(",")).map(e -> e.trim()).collect(Collectors.toList());
+        }
+        return masterDataMapper.getMasterGoodsList(ids);
     }
 
     /**
@@ -79,8 +86,13 @@ public class MasterServiceImpl implements IMasterService {
      * @return 结果
      */
     @Override
-    public List<MasterCustomerModel> getMasterCustomerList() {
-        return masterDataMapper.getMasterCustomerList();
+    public List<MasterCustomerModel> getMasterCustomerList(String masterdataId) {
+
+        List<String> ids = null;
+        if (StringUtils.isNotEmpty(masterdataId)){
+            ids = Arrays.stream(masterdataId.split(",")).map(e -> e.trim()).collect(Collectors.toList());
+        }
+        return masterDataMapper.getMasterCustomerList(ids);
     }
 
 

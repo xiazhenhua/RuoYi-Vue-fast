@@ -88,7 +88,9 @@ public class ContractInController extends BaseController
     @GetMapping("/list")
     public AjaxResult inlist(Contract contract)
     {
+//        如果是采购合同 查询ContractType = 1
         boolean flag = true;
+
         List<Contract> list = contractService.selectContractList(flag,contract);
         return AjaxResult.success(list);
     }

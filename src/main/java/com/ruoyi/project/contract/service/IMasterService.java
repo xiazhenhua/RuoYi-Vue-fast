@@ -36,12 +36,12 @@ public interface IMasterService {
      *
      * @return 结果
      */
-    public List<MasterGoodsModel> getMasterGoodsList();
+    public List<MasterGoodsModel> getMasterGoodsList(String masterdataId);
 
     /**
      * 查询客商信息主数据列表
      *
      * @return 结果
      */
-    public List<MasterCustomerModel> getMasterCustomerList();
+    public List<MasterCustomerModel> getMasterCustomerList(String masterdataId);
 }

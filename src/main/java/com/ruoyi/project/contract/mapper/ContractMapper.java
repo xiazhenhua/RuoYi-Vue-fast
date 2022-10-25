@@ -27,7 +27,7 @@ public interface ContractMapper
      * @param contract 合同管理
      * @return 合同管理集合
      */
-    public List<Contract> selectContractList(boolean flag ,@Param("contract") Contract contract);
+    public List<Contract> selectContractList(Contract contract);
 
     /**
      * 新增合同管理
