@@ -1,8 +1,12 @@
 package com.ruoyi.project.contract.domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
@@ -14,137 +18,190 @@ import com.ruoyi.framework.web.domain.TreeEntity;
  * @author sherlock
  * @date 2022-10-17
  */
+@ApiModel(value = "Contract", description = "合同实体")
 public class Contract extends TreeEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** 自增主键 */
+    @ApiModelProperty("自增主键")
     private Long id;
 
     /** 父节点id */
     @Excel(name = "父节点id")
-    private Long pid;
+    @ApiModelProperty("父节点id")
+    private Long parentId;
 
     /** 合同类型：采购、销售  根据字典值 */
     @Excel(name = "合同类型：采购、销售  根据字典值")
+    @ApiModelProperty("合同类型：采购1、销售0  根据字典值 ")
     private Integer contractType;
 
     /** 业务类型：经销、代销、联营、包销、对方发货  根据字典值 */
     @Excel(name = "业务类型：经销、代销、联营、包销、对方发货  根据字典值")
+    @ApiModelProperty("业务类型：经销、代销、联营、包销、对方发货  根据字典值")
     private Integer businessType;
 
     /** 付款类型：先款后货  根据字典值 */
     @Excel(name = "付款类型：先款后货  根据字典值")
+    @ApiModelProperty("付款类型：先款后货  根据字典值")
     private Integer payType;
 
     /** 合同编号 */
     @Excel(name = "合同编号")
+    @ApiModelProperty("合同编号")
     private String number;
 
     /** 货品编号 品种 */
     @Excel(name = "货品编号 品种")
+    @ApiModelProperty("货品编号 品种")
     private String productNo;
 
     /** 合同约定指标 */
     @Excel(name = "合同约定指标")
+    @ApiModelProperty("合同约定指标")
     private String target;
 
     /** 计价方式 */
     @Excel(name = "计价方式")
-    private String priceMethod;
+    @ApiModelProperty("计价方式")
+    private Integer priceMethod;
+
+    /** 图片地址 */
+    @Excel(name = "图片地址")
+    @ApiModelProperty("图片地址")
+    private String photoUrl;
 
     /** 货物来源 */
     @Excel(name = "货物来源")
+    @ApiModelProperty("货物来源")
     private String source;
 
     /** 单价 */
     @Excel(name = "单价")
+    @ApiModelProperty("单价")
     private BigDecimal price;
+
+    /** 删除标志（0代表存在 2代表删除） */
+    @ApiModelProperty("删除标志（0代表存在 2代表删除）")
+    private String delFlag;
 
     /** 采购数量 */
     @Excel(name = "采购数量")
+    @ApiModelProperty("采购数量")
     private Long quantity;
 
     /** 附加费用 */
     @Excel(name = "附加费用")
+    @ApiModelProperty("附加费用")
     private BigDecimal additionalCharges;
 
     /** 附加来源 */
     @Excel(name = "附加来源")
+    @ApiModelProperty("附加来源")
     private String additionalSource;
 
     /** 不含税总金额 */
     @Excel(name = "不含税总金额")
+    @ApiModelProperty("不含税总金额")
     private BigDecimal totalAmountExcludeTax;
 
     /** 税率 */
     @Excel(name = "税率")
+    @ApiModelProperty("税率")
     private BigDecimal tax;
 
     /** 含税总金额 */
     @Excel(name = "含税总金额")
+    @ApiModelProperty("含税总金额")
     private BigDecimal totalAmountIncludeTax;
 
     /** 部门ID */
     @Excel(name = "部门ID")
+    @ApiModelProperty("部门ID")
     private Long deptId;
 
     /** 供应商ID */
     @Excel(name = "供应商ID")
-    private Long supplierId;
+    @ApiModelProperty("供应商ID")
+    private String supplierId;
 
     /** 需求商ID */
     @Excel(name = "需求商ID")
-    private Long demandId;
+    @ApiModelProperty("需求商ID")
+    private String demandId;
 
     /** 合同签订日期 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "合同签订日期", width = 30, dateFormat = "yyyy-MM-dd")
+    @ApiModelProperty("合同签订日期")
     private Date signingDate;
 
     /** 生效开始日期 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "生效开始日期", width = 30, dateFormat = "yyyy-MM-dd")
+    @ApiModelProperty("生效开始日期")
     private Date validateDateBegin;
 
     /** 生效结束日期 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "生效结束日期", width = 30, dateFormat = "yyyy-MM-dd")
+    @ApiModelProperty("生效结束日期")
     private Date validateDateEnd;
 
     /** 扣罚标准 */
     @Excel(name = "扣罚标准")
+    @ApiModelProperty("扣罚标准")
     private String penalizeStandard;
 
     /** 交货地 */
     @Excel(name = "交货地")
+    @ApiModelProperty("交货地")
     private String place;
 
     /** 备注 */
     @Excel(name = "备注")
+    @ApiModelProperty("备注")
     private String remarks;
 
     /** 执行状态：-1已作废0未执行1已执行2已完结 */
     @Excel(name = "执行状态：-1已作废0未执行1已执行2已完结")
+    @ApiModelProperty("执行状态：-1已作废0未执行1已执行2已完结")
     private Integer status;
 
     /** 记录生成人 */
     @Excel(name = "记录生成人")
+    @ApiModelProperty("记录生成人")
     private String createPerson;
 
     /** 记录生成时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "记录生成时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @ApiModelProperty("记录生成时间")
     private Date createDate;
 
     /** 更新人 */
     @Excel(name = "更新人")
+    @ApiModelProperty("更新人")
     private String updatePerson;
 
     /** 更新时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @ApiModelProperty("更新时间")
     private Date updateDate;
+
+    /** 子合同 */
+    private List<Contract> children = new ArrayList<>();
+
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
 
     public void setId(Long id)
     {
@@ -155,15 +212,17 @@ public class Contract extends TreeEntity
     {
         return id;
     }
-    public void setPid(Long pid)
-    {
-        this.pid = pid;
+
+    @Override
+    public Long getParentId() {
+        return parentId;
     }
 
-    public Long getPid()
-    {
-        return pid;
+    @Override
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
+
     public void setContractType(Integer contractType)
     {
         this.contractType = contractType;
@@ -191,6 +250,15 @@ public class Contract extends TreeEntity
     {
         return payType;
     }
+
+    public String getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(String delFlag) {
+        this.delFlag = delFlag;
+    }
+
     public void setNumber(String number)
     {
         this.number = number;
@@ -218,15 +286,15 @@ public class Contract extends TreeEntity
     {
         return target;
     }
-    public void setPriceMethod(String priceMethod)
-    {
+
+    public Integer getPriceMethod() {
+        return priceMethod;
+    }
+
+    public void setPriceMethod(Integer priceMethod) {
         this.priceMethod = priceMethod;
     }
 
-    public String getPriceMethod()
-    {
-        return priceMethod;
-    }
     public void setSource(String source)
     {
         this.source = source;
@@ -308,21 +376,21 @@ public class Contract extends TreeEntity
     {
         return deptId;
     }
-    public void setSupplierId(Long supplierId)
+    public void setSupplierId(String supplierId)
     {
         this.supplierId = supplierId;
     }
 
-    public Long getSupplierId()
+    public String getSupplierId()
     {
         return supplierId;
     }
-    public void setDemandId(Long demandId)
+    public void setDemandId(String demandId)
     {
         this.demandId = demandId;
     }
 
-    public Long getDemandId()
+    public String getDemandId()
     {
         return demandId;
     }
@@ -427,13 +495,24 @@ public class Contract extends TreeEntity
     }
 
     @Override
+    public List<Contract> getChildren() {
+        return children;
+    }
+    public void setChildren1(List<Contract> children)
+    {
+        this.children = children;
+    }
+
+
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
-            .append("pid", getPid())
+            .append("pid", getParentId())
             .append("ancestors", getAncestors())
             .append("contractType", getContractType())
-            .append("business Type", getBusinessType())
+            .append("businessType", getBusinessType())
             .append("payType", getPayType())
             .append("number", getNumber())
             .append("productNo", getProductNo())

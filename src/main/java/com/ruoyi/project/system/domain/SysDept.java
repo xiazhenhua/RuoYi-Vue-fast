@@ -12,7 +12,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
  * 部门表 sys_dept
- * 
+ *
  * @author ruoyi
  */
 public class SysDept extends BaseEntity
@@ -51,7 +51,13 @@ public class SysDept extends BaseEntity
 
     /** 父部门名称 */
     private String parentName;
-    
+
+    /** 公司级标志（0代表非公司 2代表公司） */
+    private String companyFlag;
+
+    /** 主数据id */
+    private String masterdataId;
+
     /** 子部门 */
     private List<SysDept> children = new ArrayList<SysDept>();
 
@@ -179,6 +185,22 @@ public class SysDept extends BaseEntity
     public void setChildren(List<SysDept> children)
     {
         this.children = children;
+    }
+
+    public String getCompanyFlag() {
+        return companyFlag;
+    }
+
+    public void setCompanyFlag(String companyFlag) {
+        this.companyFlag = companyFlag;
+    }
+
+    public String getMasterdataId() {
+        return masterdataId;
+    }
+
+    public void setMasterdataId(String masterdataId) {
+        this.masterdataId = masterdataId;
     }
 
     @Override

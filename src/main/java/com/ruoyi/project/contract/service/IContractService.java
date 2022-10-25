@@ -28,20 +28,12 @@ public interface IContractService
 
 
     /**
-     * 查询合同管理树 (排除下级)
-     * @return
-     */
-    public List<TreeSelect> selectContractTreeExcludeChild(Contract contract);
-
-
-
-    /**
      * 查询合同管理列表
      *
      * @param contract 合同管理
      * @return 合同管理集合
      */
-    public List<Contract> selectContractList(Contract contract);
+    public List<Contract> selectContractList(boolean flag, Contract contract);
 
     /**
      * 新增合同管理

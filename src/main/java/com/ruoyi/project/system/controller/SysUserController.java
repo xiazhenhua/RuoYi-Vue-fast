@@ -1,5 +1,9 @@
 package com.ruoyi.project.system.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
@@ -35,9 +39,10 @@ import com.ruoyi.project.system.service.ISysUserService;
 
 /**
  * 用户信息
- * 
+ *
  * @author ruoyi
  */
+@Api("用户信息管理")
 @RestController
 @RequestMapping("/system/user")
 public class SysUserController extends BaseController
@@ -190,6 +195,9 @@ public class SysUserController extends BaseController
     /**
      * 重置密码
      */
+    @ApiOperation(value = "重置密码")
+    @ApiResponses({ @ApiResponse(code = 200, message = "成功"), @ApiResponse(code = 401, message = "验证失败"),
+            @ApiResponse(code = 404, message = "未找到"), @ApiResponse(code = 500, message = "内部系统错误") })
     @PreAuthorize("@ss.hasPermi('system:user:resetPwd')")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping("/resetPwd")
