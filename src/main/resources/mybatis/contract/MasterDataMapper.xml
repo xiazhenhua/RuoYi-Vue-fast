@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.contract.mapper.MasterDataMapper">
+
+
+    <!-- 批量插入 物资 主数据 -->
+    <insert id="insertMasterGoods" parameterType="java.util.List">
+
+        insert into master_goods (mdm_code,wz_name, wz_jldw_name, wz_guige)
+        values
+        <foreach collection="list" item="item" index="models" separator=",">
+           (#{item.mdmCode,jdbcType=VARCHAR},#{item.wzName,jdbcType=VARCHAR},#{item.wzJldwName,jdbcType=VARCHAR},#{item.wzGuige,jdbcType=VARCHAR})
+        </foreach>
+
+        ON DUPLICATE KEY
+        UPDATE
+        mdm_code =VALUES(mdm_code),
+        wz_name =VALUES(wz_name),wz_jldw_name = VALUES(wz_jldw_name),
+        wz_guige =VALUES(wz_guige)
+    </insert>
+
+    <!-- 批量插入 客商信息主数据 -->
+    <insert id="insertMasterCustomer" parameterType="java.util.List">
+
+        insert into master_customer (mdm_code,cv_name, cv_code, cv_type,cv_province,cv_city,cv_legal_person,cv_state)
+        values
+        <foreach collection="list" item="item" index="models" separator=",">
+            (#{item.mdmCode,jdbcType=VARCHAR},#{item.cvName,jdbcType=VARCHAR},
+            #{item.cvCode,jdbcType=VARCHAR},#{item.cvType,jdbcType=VARCHAR},
+            #{item.cvProvince,jdbcType=VARCHAR},#{item.cvCity,jdbcType=VARCHAR},
+            #{item.cvLegalPerson,jdbcType=VARCHAR},#{item.cvState,jdbcType=VARCHAR}
+            )
+        </foreach>
+
+        ON DUPLICATE KEY
+        UPDATE
+        mdm_code =VALUES(mdm_code),
+        cv_name =VALUES(cv_name),cv_code = VALUES(cv_code),
+        cv_type =VALUES(cv_type),cv_province = VALUES(cv_province),cv_city = VALUES(cv_city),
+        cv_legal_person = VALUES(cv_legal_person),cv_state = VALUES(cv_state)
+    </insert>
+
+    <!-- 物资信息主数据列表 -->
+    <select id="getMasterGoodsList" resultType="com.ruoyi.project.client.bean.MasterGoodsModel">
+
+        select * from master_goods
+
+    </select>
+    <!--  客商信息主数据列表 -->
+    <select id="getMasterCustomerList" resultType="com.ruoyi.project.client.bean.MasterCustomerModel">
+
+         select * from master_customer
+
+    </select>
+
+
+</mapper>
